@@ -1,6 +1,8 @@
 # sound_machine.py
 # A simple script to play sounds when specific keys are pressed.
 
+import sys
+
 try:
     from pynput import keyboard
 except ImportError as e:
@@ -12,22 +14,22 @@ except ImportError as e:
         print("2. Or, pynput might not be suitable for this environment without a display.")
     else:
         print(f"pynput library not found or other ImportError: {e}. Please install it using: pip install pynput")
-    exit()
+    sys.exit(1)
 except Exception as e:
     print(f"An unexpected error occurred while importing pynput: {e}")
-    exit()
+    sys.exit(1)
 
 try:
     from playsound import playsound
 except ImportError:
     print("playsound library not found. Please install it using: pip install playsound")
-    exit()
+    sys.exit(1)
 except Exception as e:
     # Handle other potential playsound import errors, e.g. on Linux if GStreamer is missing
     print(f"Error importing playsound: {e}")
     print("Please ensure all dependencies for playsound are installed for your system.")
     print("For Linux, you might need to install GStreamer: sudo apt-get install python3-gst-1.0 gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0")
-    exit()
+    sys.exit(1)
 
 # --- Configuration ---
 # This dictionary will map keyboard characters to sound file paths.
